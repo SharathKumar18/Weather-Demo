@@ -10,8 +10,12 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import com.weatherdemo.R
+import com.weatherdemo.application.WeatherDemoApp
+import com.weatherdemo.rxBus.RxHelper
 import com.weatherdemo.utils.AppUtils
+import com.weatherdemo.utils.PreferenceHelper
 import io.reactivex.observers.DisposableObserver
+import javax.inject.Inject
 
 abstract class BaseActivity : AppCompatActivity() {
 
@@ -19,7 +23,10 @@ abstract class BaseActivity : AppCompatActivity() {
     protected abstract fun getContainer(): Int
     protected abstract fun initViews()
     protected abstract fun handleBusCallback(event: Any)
-
+    @Inject
+    lateinit var rxBus: RxHelper
+    @Inject
+    lateinit var preferenceHelper: PreferenceHelper
     private var showNetworkChanged: Boolean = false
     private var receiver: BroadcastReceiver? = null
     private var disposable: DisposableObserver<Any>? = null
@@ -27,6 +34,7 @@ abstract class BaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(getLayoutId())
+        WeatherDemoApp.getContext()?.getApplicationComponent()?.inject(this)
         addBackStackChangeListener()
         addNetworkChangeListener()
         registerForBusCallback()
@@ -71,6 +79,7 @@ abstract class BaseActivity : AppCompatActivity() {
             override fun onError(e: Throwable) {}
             override fun onComplete() {}
         }
+        rxBus.toObservable()?.share()?.subscribeWith(disposable)
     }
 
     private fun unSubScribe() {

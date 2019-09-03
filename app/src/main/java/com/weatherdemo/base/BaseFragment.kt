@@ -5,7 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.weatherdemo.application.WeatherDemoApp
+import com.weatherdemo.rxBus.RxHelper
 import io.reactivex.observers.DisposableObserver
+import javax.inject.Inject
 
 abstract class BaseFragment : Fragment() {
 
@@ -13,6 +16,8 @@ abstract class BaseFragment : Fragment() {
     protected abstract fun initViews(view: View)
     abstract fun resumeScreen()
     protected abstract fun handleBusCallback(event: Any)
+    @Inject
+    lateinit var rxBus: RxHelper
     private var disposable: DisposableObserver<Any>? = null
 
     override fun onCreateView(
@@ -21,6 +26,7 @@ abstract class BaseFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(getFragmentLayoutId(), container, false)
+        WeatherDemoApp.getContext()?.getApplicationComponent()?.inject(this)
         registerForBusCallback()
         return view
     }
@@ -35,10 +41,10 @@ abstract class BaseFragment : Fragment() {
             override fun onNext(event: Any) {
                 handleBusCallback(event)
             }
-
             override fun onError(e: Throwable) {}
             override fun onComplete() {}
         }
+        rxBus?.toObservable()?.share()?.subscribeWith(disposable)
     }
 
     private fun unSubScribe() {
