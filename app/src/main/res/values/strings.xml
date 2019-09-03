@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">WeatherDemo</string>
+    <string name="connected">Network Connected</string>
+    <string name="disconnected">Network disconnected</string>
 </resources>
