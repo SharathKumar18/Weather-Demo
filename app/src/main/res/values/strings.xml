@@ -5,4 +5,13 @@
     <string name="title_location_permission">Location</string>
     <string name="text_location_permission">This is required to fetch nearby restaurants for you</string>
     <string name="ok">OK</string>
+    <string name="error_text">Something went wrong.Try again later</string>
+
+    <!--Font family̥-->
+    <string name="roboto_black">sans-serif-black</string>
+    <string name="roboto_thin">sans-serif-thin</string>
+    <string name="roboto_regular">sans-serif</string>
+    <string name="roboto_light">sans-serif-light</string>
+    <string name="roboto_condensed">sans-serif-condensed</string>
+    <string name="roboto_medium">sans-serif-medium</string>
 </resources>

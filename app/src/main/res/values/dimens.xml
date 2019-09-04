@@ -6,4 +6,6 @@
     <dimen name="margin_20dp">20dp</dimen>
     <dimen name="text_title_restaurant">14sp</dimen>
     <dimen name="splash_title_text">28sp</dimen>
+    <dimen name="margin_top_56dp">56dp</dimen>
+    <dimen name="text_size_weather_today">96sp</dimen>
 </resources>

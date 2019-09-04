@@ -7,12 +7,22 @@ import com.weatherdemo.R
 import com.weatherdemo.base.BaseViewHolder
 import com.weatherdemo.data.response.ForeCastDay
 import com.weatherdemo.rxBus.RxEvent
+import java.text.SimpleDateFormat
+
 
 class WeatherItemViewHolder(var view: View) : BaseViewHolder(view) {
 
     fun bindData(result: ForeCastDay) {
         val dayName = view.findViewById<TextView>(R.id.dayName)
         val temperature = view.findViewById<TextView>(R.id.temperature)
+
+        val format1 = SimpleDateFormat("yyyy-MM-dd")
+        val dt1 = format1.parse(result.date)
+        val format2 = SimpleDateFormat("EEEE")
+        val finalDay = format2.format(dt1)
+
+        dayName.text = finalDay
+        temperature.text = result.day?.avgtempC.toString()
         view.setOnClickListener {
             onItemClicked(result)
         }

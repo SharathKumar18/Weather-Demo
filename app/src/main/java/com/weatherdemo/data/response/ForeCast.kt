@@ -5,5 +5,5 @@ import com.google.gson.annotations.SerializedName
 
 class ForeCast(@SerializedName("forecastday")
                                    @Expose
-                                   private val forecastday: List<ForeCastDay>? = null) {
+                                   var forecastday: List<ForeCastDay>? = null) {
 }

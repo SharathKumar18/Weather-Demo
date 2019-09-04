@@ -6,16 +6,43 @@ import com.google.gson.annotations.SerializedName
 data class Day(
     @SerializedName("maxtemp_c")
     @Expose
-    private val maxtempC: Double? = null,
+    var maxtempC: Double? = null,
     @SerializedName("maxtemp_f")
     @Expose
-    private val maxtempF: Double? = null,
+    var maxtempF: Double? = null,
     @SerializedName("mintemp_c")
     @Expose
-    private val mintempC: Double? = null,
+    var mintempC: Double? = null,
     @SerializedName("mintemp_f")
     @Expose
-    private val mintempF: Double? = null
+    var mintempF: Double? = null,
+    @SerializedName("avgtemp_c")
+    @Expose
+    var avgtempC: Double? = null,
+    @SerializedName("avgtemp_f")
+    @Expose
+    var avgtempF: Double? = null,
+    @SerializedName("maxwind_mph")
+    @Expose
+    var maxwindMph: Double? = null,
+    @SerializedName("maxwind_kph")
+    @Expose
+    var maxwindKph: Double? = null,
+    @SerializedName("totalprecip_mm")
+    @Expose
+    var totalprecipMm: Double? = null,
+    @SerializedName("totalprecip_in")
+    @Expose
+    var totalprecipIn: Double? = null,
+    @SerializedName("avgvis_km")
+    @Expose
+    var avgvisKm: Double? = null,
+    @SerializedName("avgvis_miles")
+    @Expose
+    var avgvisMiles: Double? = null,
+    @SerializedName("avghumidity")
+    @Expose
+    var avghumidity: Double? = null
 ) {
 
 

@@ -23,12 +23,8 @@ class WeatherRecyclerAdapter(private var results: List<ForeCastDay>?) :
         return results?.size ?: 0
     }
 
-    fun updateItems(data: List<ForeCastDay>?, previousTotal: Int?) {
+    fun updateItems(data: List<ForeCastDay>?) {
         results = data
-        if (results != null) {
-            data?.size?.let { previousTotal?.let { it1 -> notifyItemRangeChanged(it1, previousTotal +  it) } }
-        } else {
-            notifyDataSetChanged()
-        }
+        notifyDataSetChanged()
     }
 }
