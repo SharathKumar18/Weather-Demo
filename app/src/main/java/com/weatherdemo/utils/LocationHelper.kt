@@ -6,9 +6,11 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Geocoder
+import android.location.LocationManager
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.weatherdemo.R
+import com.weatherdemo.application.WeatherDemoApp
 import java.io.IOException
 import java.util.*
 
@@ -19,13 +21,17 @@ object LocationHelperUtil {
 
     fun checkLocationPermission(context: Activity): Boolean {
         if (!checkSelfPermission(context)) {
-            return if (ActivityCompat.shouldShowRequestPermissionRationale(context,
-                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+            return if (ActivityCompat.shouldShowRequestPermissionRationale(
+                    context,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                )
+            ) {
                 alertBuilder = AlertDialog.Builder(context)
                     .setTitle(R.string.title_location_permission)
                     .setMessage(R.string.text_location_permission)
                     .setPositiveButton(R.string.ok) { var1, var2 ->
-                        requestLocationPermission(context) }
+                        requestLocationPermission(context)
+                    }
                 alertBuilder?.create()
                 alertBuilder?.show()
                 false
@@ -64,5 +70,20 @@ object LocationHelperUtil {
         } catch (e: IOException) {
             null
         }
+    }
+
+    fun checkIfLocationIsEnabled(): Boolean {
+        val locationManager = WeatherDemoApp.getContext()
+            ?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        var gpsEnabled = false
+        var networkEnabled = false
+
+        try {
+            gpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+            networkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+        } catch (ex: Exception) {
+        }
+
+        return (gpsEnabled ||  networkEnabled)
     }
 }

@@ -18,6 +18,7 @@ import com.weatherdemo.utils.AppConstants
 import com.weatherdemo.utils.AppConstants.KEY_CITY_NAME
 import com.weatherdemo.utils.FragmentNavigator
 import com.weatherdemo.utils.LocationHelperUtil
+import com.weatherdemo.utils.LocationHelperUtil.checkIfLocationIsEnabled
 import com.weatherdemo.utils.Logger
 
 class HomeActivity : BaseActivity() {
@@ -33,7 +34,7 @@ class HomeActivity : BaseActivity() {
     override fun initViews() {
         loadSplashFragment()
         val isPermissionGranted = LocationHelperUtil.checkLocationPermission(this)
-        if (isPermissionGranted) {
+        if (isPermissionGranted && checkIfLocationIsEnabled()) {
             findUserLocation()
         }
     }

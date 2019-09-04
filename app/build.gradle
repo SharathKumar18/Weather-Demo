@@ -59,6 +59,10 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:2.2.0"
     implementation "com.squareup.retrofit2:adapter-rxjava2:2.5.0"
     implementation "com.squareup.okhttp3:logging-interceptor:3.4.1"
-
-
+    // required if you want to use Mockito for unit tests
+    testImplementation 'org.mockito:mockito-core:2.23.0'
+    // required if you want to use Mockito for Android tests
+    androidTestImplementation'org.mockito:mockito-android:2.7.22'
+    testImplementation'com.nhaarman.mockitokotlin2:mockito-kotlin:2.0.0'
+    testImplementation 'org.mockito:mockito-inline:2.13.0'
 }
