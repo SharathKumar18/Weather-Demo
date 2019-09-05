@@ -5,4 +5,7 @@
     <color name="colorAccent">#D81B60</color>
     <color name="colorWeatherToday">#2A2A2A</color>
     <color name="colorAppBackground">#f5f6f7</color>
+    <color name="colorErrorBackground">#E85959</color>
+    <color name="colorErrorButtonBackground">#4a4a4a</color>
+    <color name="colorWeatherItemName">#2a2a2a</color>
 </resources>

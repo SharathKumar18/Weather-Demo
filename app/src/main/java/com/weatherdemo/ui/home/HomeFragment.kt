@@ -18,6 +18,8 @@ import com.weatherdemo.recyclerComponents.WeatherRecyclerAdapter
 import com.weatherdemo.rxBus.RxEvent
 import com.weatherdemo.utils.AppConstants
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.layout_error.view.*
+import android.view.View.VISIBLE as VISIBLE1
 
 
 class HomeFragment : BaseFragment() {
@@ -42,26 +44,30 @@ class HomeFragment : BaseFragment() {
         getViewModel()?.getUiLiveData()?.observe(this,
             Observer<UiHelper> { t -> t?.let { handleUICallbacks(uiHelper = it) } })
 
+        errorLayout.errorButton.setOnClickListener {
+            getViewModel()?.fetchRestaurantData()
+            errorLayout.visibility = View.GONE
+        }
         getViewModel()?.getErrorLiveData()?.observe(this, Observer {
             if (it) {
-                errorText.visibility = View.VISIBLE
-                errorText.text = getString(R.string.error_text)
+                errorLayout.visibility = View.VISIBLE
             } else {
-                errorText.visibility = View.GONE
-                errorText.text = ""
+                errorLayout.visibility = View.GONE
             }
         })
     }
 
     private fun updateView(it: WeatherDataClass) {
-        weatherToday.text = it.current?.tempC.toString()
+        weatherToday.text = StringBuilder().append(it.current?.tempC?.toInt())
+            .append(getString(R.string.symbol_degree))
         location.text = it.location?.name.toString()
         if (restaurantAdapter == null) {
             setUpRecyclerView(it.forecast?.forecastday)
         } else {
             restaurantAdapter?.updateItems(it.forecast?.forecastday)
         }
-        val animMoveToTop : Animation = AnimationUtils.loadAnimation(context, R.anim.reveal_recycler_view)
+        val animMoveToTop: Animation =
+            AnimationUtils.loadAnimation(context, R.anim.reveal_recycler_view)
         forecastRecyclerView.startAnimation(animMoveToTop)
 
     }
@@ -95,13 +101,9 @@ class HomeFragment : BaseFragment() {
     private fun handleUICallbacks(uiHelper: UiHelper) {
         when (uiHelper.status) {
             AppConstants.UIConstants.SHOW_PROGRESS ->
-                progressCircular.visibility = View.VISIBLE
-            AppConstants.UIConstants.HIDE_PROGRESS -> progressCircular.visibility = View.GONE
+                progressLayout.visibility = VISIBLE1
+            AppConstants.UIConstants.HIDE_PROGRESS -> progressLayout.visibility = View.GONE
         }
-    }
-
-    fun getFragmentData(): HomeViewModel? {
-        return getViewModel()
     }
 
     private fun getViewModel(): HomeViewModel? {

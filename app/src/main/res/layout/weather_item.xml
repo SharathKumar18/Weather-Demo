@@ -3,27 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="@dimen/item_height"
-    android:padding="@dimen/margin_3dp">
+    android:layout_marginStart="@dimen/margin_start_weather_recycler_item"
+    android:layout_marginLeft="@dimen/margin_start_weather_recycler_item"
+    android:layout_marginEnd="@dimen/margin_end_weather_recycler_item"
+    android:layout_marginRight="@dimen/margin_end_weather_recycler_item">
 
     <TextView
         android:id="@+id/dayName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_10dp"
-        android:layout_marginTop="@dimen/margin_20dp"
         android:layout_marginEnd="@dimen/margin_10dp"
         android:contentDescription="@null"
         android:ellipsize="end"
+        android:fontFamily="@string/roboto_regular"
         android:gravity="start"
         android:includeFontPadding="false"
         android:maxLines="1"
-        android:textColor="@android:color/black"
-        android:textSize="@dimen/text_title_restaurant"
+        android:textColor="@color/colorWeatherItemName"
+        android:textSize="@dimen/text_title_weather"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/temperature"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginRight="@dimen/margin_10dp" />
 
     <TextView
         android:id="@+id/temperature"
@@ -31,7 +34,10 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_20dp"
         android:layout_marginRight="@dimen/margin_20dp"
+        android:textSize="@dimen/text_title_weather"
+        android:textColor="@color/colorWeatherItemName"
         android:contentDescription="@null"
+        android:fontFamily="@string/roboto_regular"
         android:includeFontPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"

@@ -8,6 +8,7 @@ import com.weatherdemo.data.response.WeatherDataClass
 import com.weatherdemo.network.ResponseListener
 import com.weatherdemo.utils.ApiConstants.MAX_FORECAST
 import com.weatherdemo.utils.AppConstants
+import com.weatherdemo.utils.AppUtils
 
 class HomeViewModel(application: Application) : BaseViewModel(application = application) {
 
@@ -24,22 +25,28 @@ class HomeViewModel(application: Application) : BaseViewModel(application = appl
 
     fun fetchRestaurantData() {
         showProgress()
-        errorValue.value = false
-        preferenceHelper.getPrefString(AppConstants.KEY_CITY_NAME)?.let {
-            dataManager.getWeatherData(
-                it,
-                object : ResponseListener<WeatherDataClass>() {
-                    override fun onSuccess(response: WeatherDataClass) {
-                        hideProgress()
-                        val requiredForeCastList=ArrayList<ForeCastDay>()
-                        showForecastForLimitedDays(response, requiredForeCastList)
-                        liveData.value = response
-                    }
+        val currentCity=preferenceHelper.getPrefString(AppConstants.KEY_CITY_NAME)
+        if(AppUtils.isNetworkConnected() && currentCity!=null) {
+            "London".let {
+                dataManager.getWeatherData(
+                    it,
+                    object : ResponseListener<WeatherDataClass>() {
+                        override fun onSuccess(response: WeatherDataClass) {
+                            val requiredForeCastList = ArrayList<ForeCastDay>()
+                            showForecastForLimitedDays(response, requiredForeCastList)
+                            liveData.value = response
+                            errorValue.value=false
+                            hideProgress()
+                        }
 
-                    override fun onFailure(error: Throwable) {
-                        hideProgress()
-                    }
-                })
+                        override fun onFailure(error: Throwable) {
+                            errorValue.value=true
+                            hideProgress()
+                        }
+                    })
+            }
+        }else{
+            errorValue.value=true
         }
     }
 

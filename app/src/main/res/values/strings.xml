@@ -14,4 +14,7 @@
     <string name="roboto_light">sans-serif-light</string>
     <string name="roboto_condensed">sans-serif-condensed</string>
     <string name="roboto_medium">sans-serif-medium</string>
+    <string name="something_went_wrong">Something went wrong at our end!</string>
+    <string name="retry">Retry</string>
+    <string name="symbol_degree">\u00B0</string>
 </resources>
