@@ -1,0 +1,82 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+
+android {
+    signingConfigs {
+        WeatherDemo {
+            storeFile file('KeyStore\\WeatherDemo.jks')
+            storePassword 'WeatherDemo'
+            keyAlias = 'WeatherDemo'
+            keyPassword 'WeatherDemo'
+        }
+    }
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.weatherdemo"
+        minSdkVersion 16
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled = true
+        setProperty("archivesBaseName", "WeatherDemo" + "-v" + versionCode + "(" + versionName + ")")
+        signingConfig signingConfigs.debug
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.WeatherDemo
+            multiDexEnabled = true
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    androidExtensions {
+        experimental = true
+    }
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.core:core-ktx:1.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation "android.arch.lifecycle:extensions:1.1.1"
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation "android.arch.lifecycle:extensions:1.1.1"
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation "android.arch.lifecycle:extensions:1.1.1"
+    implementation 'com.google.code.gson:gson:2.8.5'
+    //dagger
+    implementation 'com.google.dagger:dagger:2.13'
+    kapt 'com.google.dagger:dagger-compiler:2.13'
+    // other dependencies
+    implementation "com.squareup.retrofit2:retrofit:2.5.0"
+    implementation "com.squareup.retrofit2:converter-gson:2.2.0"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:2.5.0"
+    implementation "com.squareup.okhttp3:logging-interceptor:3.4.1"
+    // required if you want to use Mockito for unit tests
+    testImplementation 'org.mockito:mockito-core:2.23.0'
+    // required if you want to use Mockito for Android tests
+    androidTestImplementation'org.mockito:mockito-android:2.7.22'
+    testImplementation'com.nhaarman.mockitokotlin2:mockito-kotlin:2.0.0'
+    testImplementation 'org.mockito:mockito-inline:2.13.0'
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
+}
