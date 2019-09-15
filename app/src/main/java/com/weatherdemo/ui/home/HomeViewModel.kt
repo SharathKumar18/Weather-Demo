@@ -27,7 +27,7 @@ class HomeViewModel(application: Application) : BaseViewModel(application = appl
         showProgress()
         val currentCity=preferenceHelper.getPrefString(AppConstants.KEY_CITY_NAME)
         if(AppUtils.isNetworkConnected() && currentCity!=null) {
-            "London".let {
+            currentCity.let {
                 dataManager.getWeatherData(
                     it,
                     object : ResponseListener<WeatherDataClass>() {
