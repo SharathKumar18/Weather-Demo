@@ -1,10 +1,8 @@
 package com.weatherdemo.network
 
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import com.weatherdemo.data.response.WeatherDataClass
 import com.weatherdemo.utils.ApiConstants
 import io.reactivex.ObservableSource
-import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers

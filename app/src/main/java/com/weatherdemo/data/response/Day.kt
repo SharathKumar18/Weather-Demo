@@ -43,7 +43,4 @@ data class Day(
     @SerializedName("avghumidity")
     @Expose
     var avghumidity: Double? = null
-) {
-
-
-}
+)

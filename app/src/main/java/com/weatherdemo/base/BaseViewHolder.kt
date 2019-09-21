@@ -1,5 +1,6 @@
 package com.weatherdemo.base
 
+import android.annotation.SuppressLint
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.weatherdemo.application.WeatherDemoApp
@@ -23,6 +24,7 @@ abstract class BaseViewHolder (view: View) : RecyclerView.ViewHolder(view) {
         WeatherDemoApp.getContext()?.getApplicationComponent()?.inject(this)
     }
 
+    @SuppressLint("CheckResult")
     private fun registerForBusCallback() {
         disposable = object : DisposableObserver<Any>() {
             override fun onNext(event: Any) {
@@ -33,6 +35,6 @@ abstract class BaseViewHolder (view: View) : RecyclerView.ViewHolder(view) {
 
             override fun onComplete() {}
         }
-        rxBus?.toObservable()?.share()?.subscribeWith(disposable)
+        rxBus.toObservable()?.share()?.subscribeWith(disposable)
     }
 }

@@ -1,17 +1,15 @@
 package com.weatherdemo.recyclerComponents
 
 import android.view.View
-import android.widget.ImageView
 import android.widget.TextView
 import com.weatherdemo.R
 import com.weatherdemo.base.BaseViewHolder
 import com.weatherdemo.data.response.ForeCastDay
 import com.weatherdemo.rxBus.RxEvent
 import com.weatherdemo.utils.AppUtils
-import java.text.SimpleDateFormat
 
 
-class WeatherItemViewHolder(var view: View) : BaseViewHolder(view) {
+class WeatherItemViewHolder(private var view: View) : BaseViewHolder(view) {
 
     fun bindData(result: ForeCastDay) {
         val dayName = view.findViewById<TextView>(R.id.dayName)

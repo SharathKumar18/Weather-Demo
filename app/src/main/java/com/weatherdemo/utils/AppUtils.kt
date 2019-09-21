@@ -1,6 +1,5 @@
 package com.weatherdemo.utils
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.net.ConnectivityManager
 import com.weatherdemo.application.WeatherDemoApp

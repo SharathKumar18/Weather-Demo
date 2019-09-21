@@ -1,7 +1,7 @@
 package com.weatherdemo.network
 
 import com.weatherdemo.utils.ApiConstants
-import java.util.HashMap
+import java.util.*
 
 object NetworkQueryMapper {
 
@@ -18,9 +18,9 @@ object NetworkQueryMapper {
 
     fun getWeatherQuery(city: String): Map<String, String> {
         val queryMap = HashMap<String, String>()
-        queryMap.put(ApiConstants.KEY,ApiConstants.API_KEY)
-        queryMap.put(ApiConstants.Q,city)
-        queryMap.put(ApiConstants.DAYS,ApiConstants.DEFAULT_DAYS)
+        queryMap[ApiConstants.KEY] = ApiConstants.API_KEY
+        queryMap[ApiConstants.Q] = city
+        queryMap[ApiConstants.DAYS] = ApiConstants.DEFAULT_DAYS
         return queryMap
     }
 }

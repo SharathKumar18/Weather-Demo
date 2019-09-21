@@ -34,7 +34,15 @@ class HomeFragment : BaseFragment() {
     override fun initViews(view: View) {
         observeLiveData()
         setUpRecyclerView(null)
-        getViewModel()?.fetchRestaurantData()
+        setErrorButtonClickListener()
+        getViewModel()?.fetchWeatherInfoFromServer()
+    }
+
+    private fun setErrorButtonClickListener() {
+        errorLayout.errorButton.setOnClickListener {
+            getViewModel()?.fetchWeatherInfoFromServer()
+            errorLayout.visibility = View.GONE
+        }
     }
 
     private fun observeLiveData() {
@@ -44,10 +52,7 @@ class HomeFragment : BaseFragment() {
         getViewModel()?.getUiLiveData()?.observe(this,
             Observer<UiHelper> { t -> t?.let { handleUICallbacks(uiHelper = it) } })
 
-        errorLayout.errorButton.setOnClickListener {
-            getViewModel()?.fetchRestaurantData()
-            errorLayout.visibility = View.GONE
-        }
+
         getViewModel()?.getErrorLiveData()?.observe(this, Observer {
             if (it) {
                 errorLayout.visibility = View.VISIBLE
@@ -80,7 +85,7 @@ class HomeFragment : BaseFragment() {
             when (event.eventTag) {
                 RxEvent.EVENT_LOCATION_UPDATED -> {
                     if (event.data is Location && isResumed) {
-                        getViewModel()?.fetchRestaurantData()
+                        getViewModel()?.fetchWeatherInfoFromServer()
                     }
                 }
             }

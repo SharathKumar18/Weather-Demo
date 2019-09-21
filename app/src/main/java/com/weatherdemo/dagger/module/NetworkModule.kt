@@ -61,7 +61,7 @@ class NetworkModule {
     val retrofitInterface: RetrofitInterface
         @Provides
         @Singleton
-        get() = retrofit.create(RetrofitInterface::class.java!!)
+        get() = retrofit.create(RetrofitInterface::class.java)
 
     @Provides
     @Singleton

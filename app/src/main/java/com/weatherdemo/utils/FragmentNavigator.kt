@@ -8,30 +8,6 @@ import androidx.fragment.app.FragmentManager
 
 object FragmentNavigator {
 
-    fun addFragment(
-        activity: Activity,
-        fm: FragmentManager?,
-        containerId: Int,
-        fragment: Fragment,
-        args: Bundle?,
-        addToBackStack: Boolean,
-        tag: String
-    ) {
-        if (activity.isFinishing && fm == null) return
-        try {
-            if (args != null) {
-                fragment.arguments = args
-            }
-            val fTransaction = fm!!.beginTransaction()
-            fTransaction.add(containerId, fragment, tag)
-            fTransaction.addToBackStack(tag).commitAllowingStateLoss()
-            fm.executePendingTransactions()
-        } catch (e: Exception) {
-            Logger.e("exceptionTransaction:", e.toString())
-        }
-
-    }
-
     fun replaceFragment(
         activity: Activity,
         fm: FragmentManager?,

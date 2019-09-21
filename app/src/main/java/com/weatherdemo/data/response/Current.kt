@@ -20,7 +20,4 @@ data class Current(
     @Expose
     var isDay: Int? = null
 
-) {
-
-
-}
+)
