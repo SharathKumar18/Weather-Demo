@@ -1,6 +1,5 @@
 package com.weatherdemo.model
 
-import com.weatherdemo.data.response.Current
 import com.weatherdemo.data.response.ForeCast
 import com.weatherdemo.data.response.ForeCastDay
 import org.junit.Assert

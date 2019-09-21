@@ -1,9 +1,7 @@
 package com.weatherdemo.application
 
 import android.app.Application
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.ProcessLifecycleOwner
 import com.weatherdemo.dagger.component.AppComponent
 import com.weatherdemo.dagger.component.DaggerAppComponent
@@ -34,16 +32,6 @@ class WeatherDemoApp : Application(), LifecycleObserver {
     override fun onTerminate() {
         super.onTerminate()
         instance = null
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-    fun onAppBackgrounded() {
-
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_START)
-    fun onAppForegrounded() {
-
     }
 
     companion object {

@@ -23,7 +23,7 @@ class HomeViewModel(application: Application) : BaseViewModel(application = appl
         return errorValue
     }
 
-    fun fetchRestaurantData() {
+    fun fetchWeatherInfoFromServer() {
         showProgress()
         val currentCity=preferenceHelper.getPrefString(AppConstants.KEY_CITY_NAME)
         if(AppUtils.isNetworkConnected() && currentCity!=null) {
@@ -45,8 +45,6 @@ class HomeViewModel(application: Application) : BaseViewModel(application = appl
                         }
                     })
             }
-        }else{
-            errorValue.value=true
         }
     }
 
@@ -55,7 +53,7 @@ class HomeViewModel(application: Application) : BaseViewModel(application = appl
         requiredForeCastList: ArrayList<ForeCastDay>
     ) {
         for (i in 1..MAX_FORECAST) {
-            response.forecast?.forecastday?.get(i)?.let { requiredForeCastList?.add(it) }
+            response.forecast?.forecastday?.get(i)?.let { requiredForeCastList.add(it) }
         }
         response.forecast?.forecastday = requiredForeCastList
     }

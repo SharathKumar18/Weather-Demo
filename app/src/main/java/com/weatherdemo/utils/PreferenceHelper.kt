@@ -22,10 +22,6 @@ class PreferenceHelper {
         preference!!.edit().putFloat(name, value).apply()
     }
 
-    fun getPrefFloat(name: String): Float {
-        return preference!!.getFloat(name, 0f)
-    }
-
     fun getPrefString(name: String): String? {
         return preference!!.getString(name, null)
     }

@@ -13,5 +13,4 @@ data class WeatherDataClass(
     @SerializedName("forecast")
     @Expose
     var forecast: ForeCast? = null
-) :BaseModel(){
-}
+) :BaseModel()

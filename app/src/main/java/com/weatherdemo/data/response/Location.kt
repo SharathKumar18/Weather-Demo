@@ -29,7 +29,3 @@ data class Location(
 @Expose
 var localtime: String? = null)
 
-{
-
-
-}
